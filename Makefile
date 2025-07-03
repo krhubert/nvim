@@ -1,9 +1,32 @@
 .DEFAULT_GOAL=help
 help: ALIGN=32
-help: ## print this help
+help: ## pritn this help message
 	@awk -F '::? .*## ' -- "/^[^':]+::? .*## /"' { printf "'$$(tput bold)$$(tput setaf 207)'  %-$(ALIGN)s'$$(tput sgr0)' %s\n", $$1, $$2  }' $(MAKEFILE_LIST)
 
-.PHONY: instalx
+.PHONY: check
+check: ## check if all tools are installed
+check: check/go
+check: check/node
+check: check/terraform
+check: check/luarocks
+
+.PHONY: check/go
+check/go: ## check if go is installed
+	$(call check_exists,go)
+
+.PHONY: check/node
+check/node: ## check if node is installed
+	$(call check_exists,node)
+
+.PHONY: check/terraform
+check/terraform: ## check if terraform is installed
+	$(call check_exists,terraform)
+
+.PHONY: check/luarocks
+check/luarocks: ## check if luarocks is installed
+	$(call check_exists,luarocks)
+
+.PHONY: instal
 install: ## install tools and lsp servers
 install: install/actionlint
 install: install/autotools-language-server
@@ -116,4 +139,7 @@ config/yamlfmt:
 	@mkdir -p ~/.config/yamlfmt
 	@cp ./config/yamlfmt/* ~/.config/yamlfmt/
 
-
+## check if given command exists
+define check_exists
+	@command -v $1 >/dev/null 2>&1 || { echo >&2 "$1 is not found."; exit 1; }
+endef
