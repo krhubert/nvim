@@ -89,6 +89,7 @@ return {
 
       on_highlights = function(hl, c)
         hl.Directory.fg = "#bccdfb"
+        hl.Comment.fg = "#777777"
       end,
     },
     config = function(_, opts)
