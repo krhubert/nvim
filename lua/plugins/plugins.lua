@@ -162,12 +162,19 @@ return {
       "NvimTreeClose",
       "NvimTreeFocus",
     },
+    opts = {},
     keys = {
-      { "<C-d>", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
+      {
+        "<C-d>",
+        function()
+          require("nvim-tree.api").tree.toggle({ find_file = true })
+        end,
+        desc = "Explorer",
+      },
       { "<C-e>", "<cmd>NvimTreeFindFile<cr>", desc = "Explorer Find File" },
     },
-    config = function()
-      require("nvim-tree").setup()
+    config = function(_, opts)
+      require("nvim-tree").setup(opts)
     end,
   },
 
