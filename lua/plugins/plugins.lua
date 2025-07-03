@@ -993,7 +993,6 @@ return {
         sql = { "sqlfluff" },
         markdown = { "markdownlint-cli2" },
         tf = { "terraform_fmt" },
-        ["*"] = { "typos" },
       },
     },
   },
