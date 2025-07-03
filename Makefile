@@ -1,6 +1,6 @@
 .DEFAULT_GOAL=help
 help: ALIGN=32
-help: ## pritn this help message
+help: ## print this help message
 	@awk -F '::? .*## ' -- "/^[^':]+::? .*## /"' { printf "'$$(tput bold)$$(tput setaf 207)'  %-$(ALIGN)s'$$(tput sgr0)' %s\n", $$1, $$2  }' $(MAKEFILE_LIST)
 
 .PHONY: check
