@@ -121,23 +121,26 @@ install/go-test-coverage:
 install/go-carpet:
 	go install github.com/msoap/go-carpet@latest
 
-
+.PHONY: config
 config: ## copy configs
 config: config/sqlfluff
 config: config/yamllint
 config: config/yamlfmt
 
+.PHONY: config/sqlfluff
 config/sqlfluff:
 	@mkdir -p ~/.config/sqlfluff
-	@cp ./config/sqlfluff/* ~/.config/sqlfluff/
+	@cp ./config/sqlfluff/setup.cfg ~/.config/sqlfluff/setup.cfg
 
+.PHONY: config/yamllint
 config/yamllint:
 	@mkdir -p ~/.config/yamllint
-	@cp ./config/yamlfmt/* ~/.config//yamlfmt/
+	@cp ./config/yamllint/config ~/.config//yamllint/confgi
 
+.PHONY: config/yamlfmt
 config/yamlfmt:
 	@mkdir -p ~/.config/yamlfmt
-	@cp ./config/yamlfmt/* ~/.config/yamlfmt/
+	@cp ./config/yamlfmt/.yamlfmt ~/.config/yamlfmt/.yamlfmt
 
 ## check if given command exists
 define check_exists
