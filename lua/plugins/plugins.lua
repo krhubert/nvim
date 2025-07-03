@@ -980,7 +980,7 @@ return {
       log_level = vim.log.levels.DEBUG,
       format_on_save = {
         async = false,
-        timeout_ms = 500,
+        timeout_ms = 2500,
         lsp_fallback = "fallback",
         quiet = false,
       },
