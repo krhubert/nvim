@@ -537,6 +537,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     ft = { "go", "gomod", "gowork", "gosum" },
+    event = { "CmdlineEnter" },
     build = ':lua require("go.install").update_all_sync()',
     opts = {
       diagnostic = false,
