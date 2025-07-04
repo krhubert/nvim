@@ -1018,7 +1018,7 @@ return {
       },
       formatters_by_ft = {
         sh = { "shfmt" },
-        go = { "goimports", "gofumpt", "gofmt" },
+        go = { "golangci-lint" },
         lua = { "stylua" },
         proto = { "buf" },
         yaml = { "yamlfmt" },
