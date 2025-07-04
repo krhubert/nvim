@@ -957,6 +957,30 @@ return {
         end
       end
 
+      -- customize typos-cli and load config
+      -- 1. travers up the path to find typos.toml
+      -- 2. config file is loaded from ~/.config/typos/typos.toml
+      local typos = require("lint").linters.typos
+      if type(typos) ~= "table" then
+        vim.notify("nvim-lint: typos linter not found", vim.log.levels.WARN)
+        return
+      end
+
+      local typos_cfg = vim.fs.find("typos.toml", {
+        path = vim.fn.expand("%:p:h"),
+        upward = true,
+        type = "file",
+      })[1]
+
+      if vim.fn.filereadable(typos_cfg) == 0 then
+        typos_cfg = vim.fn.expand("~/.config/typos/typos.toml")
+      end
+
+      if vim.fn.filereadable(typos_cfg) == 1 then
+        table.insert(typos.args, "--config")
+        table.insert(typos.args, typos_cfg)
+      end
+
       vim.api.nvim_create_autocmd(opts.events, {
         group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
         callback = M.debounce(100, M.lint),
