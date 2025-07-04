@@ -50,11 +50,11 @@ function get_git_root_or_buffer_dir()
     type = "file",
   })[1]
 
-  if makefile_file then
+  if makefile_file and vim.fn.filereadable(makefile_file) == 1 then
     return vim.fn.fnamemodify(makefile_file, ":h")
   end
 
-  return "git_root"
+  return "git_dir"
 end
 
 function _terminal_toggle()
