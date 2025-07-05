@@ -23,7 +23,7 @@ vim.o.showmode = false
 vim.o.updatetime = 200
 
 -- decrease mapped sequence wait time
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 1000
 
 -- smart case for search
 vim.o.ignorecase = true
