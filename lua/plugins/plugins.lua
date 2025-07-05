@@ -249,6 +249,7 @@ return {
     "folke/which-key.nvim",
     lazy = false,
     opts = {
+      preset = "helix",
       specs = {
         { "<leader>s", group = "Search and Replace" },
         { "<leader>g", group = "Golang" },
