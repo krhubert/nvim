@@ -251,8 +251,11 @@ return {
     opts = {
       preset = "helix",
       specs = {
-        { "<leader>s", group = "Search and Replace" },
-        { "<leader>g", group = "Golang" },
+        {
+          mode = { "n", "v" },
+          { "<leader>s", group = "Search and Replace" },
+          { "<leader>g", group = "Golang" },
+        },
       },
       keys = {
         scroll_down = "<c-j>",
