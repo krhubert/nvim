@@ -855,11 +855,11 @@ return {
     -- - expand tables view by default
     -- - sqlc integration
     keys = {
-      {
-        "<space>",
-        "<Plug>(DBUI_ToggleResultLayout)",
-        desc = "Toggle Database UI",
-      },
+      -- {
+      --   "<space>",
+      --   "<Plug>(DBUI_ToggleResultLayout)",
+      --   desc = "Toggle Database UI",
+      -- },
     },
   },
 
