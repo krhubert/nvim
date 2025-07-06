@@ -250,11 +250,12 @@ return {
     lazy = false,
     opts = {
       preset = "helix",
-      specs = {
+      defaults = {},
+      spec = {
         {
           mode = { "n", "v" },
-          { "<leader>s", group = "Search and Replace" },
-          { "<leader>g", group = "Golang" },
+          { "<leader>s", group = "search and replace" },
+          { "<leader>g", group = "golang" },
         },
       },
       keys = {
