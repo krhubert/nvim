@@ -893,7 +893,7 @@ return {
         docker = { "hadolint" },
         go = { "golangcilint" },
         terraform = { "terraform_validate", "tflint", "tfsec" },
-        sql = { "sqlfluff" },
+        -- sql = { "sqlfluff" },
         markdown = { "markdownlint-cli2" },
         yaml = { "yamllint" },
         ["yaml.gh_actions"] = { "actionlint" },
