@@ -253,9 +253,19 @@ return {
       require("fzf-lua").register_ui_select()
     end,
     keys = {
-      { "<C-p>", "<Cmd>Fzf files<CR>", desc = "Files (Root Dir)" },
-      { "<C-g>", "<Cmd>Fzf live_grep<CR>", desc = "Grep Project" },
-      { "<F1>", "<Cmd>Fzf help_tags<CR>", desc = "Help Tags" },
+      { mode = "n", "<C-p>", "<Cmd>Fzf files<CR>", desc = "Files (Root Dir)" },
+      { mode = "n", "<C-g>", "<Cmd>Fzf live_grep<CR>", desc = "Grep Project" },
+      { mode = "n", "<F1>", "<Cmd>Fzf help_tags<CR>", desc = "Help Tags" },
+      {
+        mode = "n",
+        "<leader>fw",
+        function()
+          require("fzf-lua").live_grep({
+            query = vim.fn.expand("<cword>"),
+          })
+        end,
+        desc = "Grep word under cursor",
+      },
     },
   },
 
