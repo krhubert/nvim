@@ -1,6 +1,3 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
-
 -- clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -9,34 +6,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>x<CR>", { desc = "Save and quit current f
 vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save current file" })
 vim.keymap.set("n", "<leader>q", "<cmd>q!<CR>", { desc = "Quit all windows" })
 vim.keymap.set("n", "<leader>co", "<cmd>close<CR>", { desc = "Close current window" })
-
-vim.keymap.set("n", "<leader>y", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
--- Keymaps for Go commands
--- vim.keymap.set('i', '<C-e>', '<Esc>:GoIfErr<CR>i', { noremap = true, silent = true })
--- vim.keymap.set('n', '<C-b>', ':GoBuild<CR>', { noremap = true, silent = true })
-
--- vim.keymap.set('n', '<F2>', '<Plug>(go-rename)', { noremap = true, silent = true })
--- vim.keymap.set('n', '<F3>', '<Plug>(go-referrers)', { noremap = true, silent = true })
-
--- Keymaps for diagnostics
-local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
-end
-vim.keymap.set("n", "<leader>dt", function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { desc = "Toggle Diagnostics" })
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete without yanking" })
 

@@ -127,10 +127,15 @@ vim.lsp.enable({
   -- "golangci-lint",
 })
 
+-- diagnostic configuration
 vim.diagnostic.config({
-  virtual_lines = true,
+  virtual_text = {
+    current_line = true,
+    virt_text_pos = "right_align",
+  },
+  virtual_lines = false,
   underline = true,
-  update_in_insert = false,
+  update_in_insert = true,
   severity_sort = true,
   float = {
     border = "rounded",
@@ -148,6 +153,78 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.WARN] = "WarningMsg",
     },
   },
+})
+
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+local diagnostic_virtual_lines_on = function()
+  vim.diagnostic.config({
+    virtual_text = false,
+    virtual_lines = true,
+  })
+end
+
+local diagnostic_virtual_text_on = function()
+  vim.diagnostic.config({
+    virtual_text = {
+      current_line = true,
+      virt_text_pos = "right_align",
+    },
+    virtual_lines = false,
+  })
+end
+
+local diagnostic_virtual_toggle = function()
+  local config = vim.diagnostic.config()
+
+  local has_vlines = type(config.virtual_lines) == "boolean" and config.virtual_lines
+    or type(config.virtual_lines) == "table" and not vim.tbl_isempty(config.virtual_lines)
+
+  local has_vtext = type(config.virtual_text) == "boolean" and config.virtual_text
+    or type(config.virtual_text) == "table" and not vim.tbl_isempty(config.virtual_text)
+
+  if has_vlines and has_vtext or not has_vlines and not has_vtext then
+    diagnostic_virtual_text_on()
+  elseif has_vlines then
+    diagnostic_virtual_text_on()
+  else
+    diagnostic_virtual_lines_on()
+  end
+end
+
+vim.keymap.set("n", "<leader>dq", vim.diagnostic.setloclist, { desc = "Open [q]uickfix list" })
+
+vim.keymap.set("n", "<leader>dd", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = "Toggle [d]iagnostic" })
+
+vim.keymap.set("n", "<leader>dv", diagnostic_virtual_toggle, { desc = "Toggle [v]irtual lines <-> text" })
+
+vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+  callback = vim.schedule_wrap(diagnostic_virtual_text_on),
+})
+
+vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+  callback = vim.schedule_wrap(diagnostic_virtual_text_on),
+})
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    vim.defer_fn(diagnostic_virtual_lines_on, 100)
+  end,
 })
 
 -- disable default netrw in favor of nvim-tree
