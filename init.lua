@@ -153,6 +153,7 @@ vim.diagnostic.config({
 -- disable default netrw in favor of nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.netrw_nogx = 1
 
 -- setup conform.nvim for formatting
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

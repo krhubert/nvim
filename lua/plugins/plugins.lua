@@ -151,6 +151,23 @@ return {
   },
 
   --
+  -- https://github.com/chrishrb/gx.nvim
+  --
+  {
+    "chrishrb/gx.nvim",
+    lazy = false,
+    cmd = { "Browse" },
+    opts = {
+      handlers = {
+        go = true,
+      },
+    },
+    keys = {
+      { "<leader>gx", "<cmd>Browse<cr>", desc = "Open Link" },
+    },
+  },
+
+  --
   -- https://github.com/nvim-tree/nvim-tree.lua
   --
   {
