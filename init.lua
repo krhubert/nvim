@@ -115,6 +115,7 @@ vim.lsp.enable({
   "go",
   "json",
   "yaml",
+  "protols",
 
   -- disable sql for now as it needs more configuration
   -- "sqls",

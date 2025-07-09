@@ -37,6 +37,7 @@ return {
         "yaml-language-server",
         "yamlfmt",
         "yamllint",
+        "protols",
       },
     },
     config = function(_, opts)
