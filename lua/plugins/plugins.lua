@@ -233,6 +233,18 @@ return {
   },
 
   --
+  -- https://github.com/tpope/vim-fugitive
+  --
+  {
+    "tpope/vim-fugitive",
+    lazy = false,
+    cmd = { "Git" },
+    keys = {
+      { mode = "n", "<leader>Gb", "<cmd>Git blame<cr>", desc = "Git Blame" },
+    },
+  },
+
+  --
   -- https://github.com/ibhagwan/fzf-lua
   --
   {
@@ -282,8 +294,10 @@ return {
       spec = {
         {
           mode = { "n", "v" },
-          { "<leader>s", group = "search and replace" },
-          { "<leader>g", group = "golang" },
+          { "<leader>s", group = "[s]earch and replace" },
+          { "<leader>g", group = "[g]olang" },
+          { "<leader>G", group = "[G]it" },
+          { "<leader>t", group = "[t]ouble" },
         },
       },
       keys = {
@@ -1200,10 +1214,10 @@ return {
       },
     },
     keys = {
-      { "<leader>td", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
-      { "<leader>tt", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
-      { "<leader>tl", "<cmd>Trouble lsp toggle<cr>", desc = "LSP (Trouble)" },
-      { "<leader>tc", "<cmd>Trouble close<cr>", desc = "Close (Trouble)" },
+      { "<leader>td", "<cmd>Trouble diagnostics toggle<cr>", desc = "[d]iagnostics toggle" },
+      { "<leader>tt", "<cmd>Trouble todo toggle<cr>", desc = "[t]odo toggle" },
+      { "<leader>tl", "<cmd>Trouble lsp toggle<cr>", desc = "[l]sp toggle" },
+      { "<leader>tc", "<cmd>Trouble close<cr>", desc = "[c]lose" },
       {
         "]t",
         function()
