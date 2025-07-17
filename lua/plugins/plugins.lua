@@ -279,6 +279,14 @@ return {
         end,
         desc = "Grep word under cursor",
       },
+      {
+        mode = "n",
+        "<leader>fre",
+        function()
+          require("fzf-lua").lsp_references()
+        end,
+        desc = "References",
+      },
     },
   },
 
@@ -606,7 +614,8 @@ return {
       { mode = "n", "<leader>gta", "<cmd>GoAddTag<cr>", desc = "Add tags" },
       { mode = "n", "<leader>gtr", "<cmd>GoRmTag<cr>", desc = "Remove tags" },
       { mode = "n", "<leader>gte", "<cmd>GoTest<cr>", desc = "Run tests" },
-      { mode = "n", "<leader>gr", vim.lsp.buf.rename, desc = "Rename" },
+      { mode = "n", "<leader>grn", vim.lsp.buf.rename, desc = "[r]e[n]ame" },
+      { mode = "n", "<leader>gre", vim.lsp.buf.references, desc = "[r][e]ferences" },
       { mode = "n", "<leader>gat", "<cmd>GoAlt!<cr>", desc = "Toggle test" },
       { mode = "n", "<leader>gas", "<cmd>GoAltS!<cr>", desc = "Toggle split test" },
       { mode = "n", "<leader>gav", "<cmd>GoAltV!<cr>", desc = "Toggle vsplit test" },
