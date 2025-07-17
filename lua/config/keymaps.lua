@@ -2,10 +2,10 @@
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- faster save, write and quit commands
-vim.keymap.set("n", "<leader>x", "<cmd>x<CR>", { desc = "Save and quit current file" })
-vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "Save current file" })
-vim.keymap.set("n", "<leader>q", "<cmd>q!<CR>", { desc = "Quit all windows" })
-vim.keymap.set("n", "<leader>co", "<cmd>close<CR>", { desc = "Close current window" })
+vim.keymap.set("n", "<leader>x", "<cmd>xa<CR>", { desc = "Write all files and quit" })
+vim.keymap.set("n", "<leader>w", "<cmd>wa<CR>", { desc = "[w]rite all files" })
+vim.keymap.set("n", "<leader>q", "<cmd>q!<CR>", { desc = "[q]uit all windows" })
+vim.keymap.set("n", "<leader>co", "<cmd>close<CR>", { desc = "[c]l[o]se current window" })
 
 vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete without yanking" })
 
