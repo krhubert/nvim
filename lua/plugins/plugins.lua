@@ -606,7 +606,7 @@ return {
       { mode = "n", "<leader>gta", "<cmd>GoAddTag<cr>", desc = "Add tags" },
       { mode = "n", "<leader>gtr", "<cmd>GoRmTag<cr>", desc = "Remove tags" },
       { mode = "n", "<leader>gte", "<cmd>GoTest<cr>", desc = "Run tests" },
-      { mode = "n", "<leader>gr", "<cmd>GoRename<cr>", desc = "Rename" },
+      { mode = "n", "<leader>gr", vim.lsp.buf.rename, desc = "Rename" },
       { mode = "n", "<leader>gat", "<cmd>GoAlt!<cr>", desc = "Toggle test" },
       { mode = "n", "<leader>gas", "<cmd>GoAltS!<cr>", desc = "Toggle split test" },
       { mode = "n", "<leader>gav", "<cmd>GoAltV!<cr>", desc = "Toggle vsplit test" },
