@@ -1,11 +1,9 @@
 return {
   cmd = { "gopls" },
-  filetypes = { "go", "gomod", "gowork", "gotmpl", "gosum" },
+  filetypes = { "go", "gowork", "gomod", "gotmpl", "gosum" },
   root_markers = { "go.work", "go.mod", ".git" },
-  --  root_dir = { "go.mod", "go.work", ".git" },
   settings = {
     gopls = {
-      experimentalWorkspaceModule = true,
       gofumpt = true,
       codelenses = {
         gc_details = false,
