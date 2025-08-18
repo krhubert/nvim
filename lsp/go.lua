@@ -5,6 +5,7 @@ return {
   --  root_dir = { "go.mod", "go.work", ".git" },
   settings = {
     gopls = {
+      experimentalWorkspaceModule = true,
       gofumpt = true,
       codelenses = {
         gc_details = false,
