@@ -952,7 +952,56 @@ return {
         shell = { "shellcheck" },
         ["*"] = { "typos" },
       },
-      linters = {},
+      linters = {
+        golangcilint = {
+          args = {
+            "run",
+            "--output.json.path=stdout",
+            -- Overwrite values possibly set in .golangci.yml
+            "--output.text.path=",
+            "--output.tab.path=",
+            "--output.html.path=",
+            "--output.checkstyle.path=",
+            "--output.code-climate.path=",
+            "--output.junit-xml.path=",
+            "--output.teamcity.path=",
+            "--output.sarif.path=",
+            "--issues-exit-code=0",
+            "--show-stats=false",
+            -- Get absolute path of the linted file
+            "--path-mode=abs",
+            function()
+              return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
+            end,
+          },
+        },
+      },
+      custom = {
+        golangcilint = {
+          -- golangci-lint does not support go submodules and go.work files
+          -- so we need to find the first go.mod file in the current directory
+          -- or any parent directory, otherwise golangci is run in the
+          -- directory where nvim is opened. If this is outside the
+          -- current file go.mod (e.g. in the project root dir where go.work lives),
+          -- then the linter will not work correctly.
+          cwd = function()
+            local current_file = vim.api.nvim_buf_get_name(0)
+            local current_dir = vim.fn.fnamemodify(current_file, ":h")
+
+            local gomod_file = vim.fs.find("go.mod", {
+              path = current_dir,
+              upward = true,
+              type = "file",
+            })[1]
+
+            if gomod_file and vim.fn.filereadable(gomod_file) == 1 then
+              return vim.fn.fnamemodify(gomod_file, ":h")
+            end
+
+            return current_dir
+          end,
+        },
+      },
     },
     config = function(_, opts)
       local M = {}
@@ -1004,7 +1053,13 @@ return {
         end, names)
 
         if #names > 0 then
-          lint.try_lint(names)
+          -- check if naems contains golangcilint, then set the cwd
+          local lintopts = {}
+          if vim.tbl_contains(names, "golangcilint") then
+            lintopts = { cwd = opts.custom.golangcilint.cwd() }
+          end
+
+          lint.try_lint(names, lintopts)
         end
       end
 

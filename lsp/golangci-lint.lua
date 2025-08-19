@@ -1,6 +1,6 @@
 return {
   cmd = { "golangci-lint-langserver" },
-  filetypes = { "go", "gomod" },
+  filetypes = { "go", "gowork", "gomod" },
   init_options = {
     command = { "golangci-lint", "run", "--output.json.path=stdout", "--show-stats=false" },
   },
