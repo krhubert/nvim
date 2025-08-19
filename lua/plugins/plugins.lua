@@ -281,11 +281,9 @@ return {
       },
       {
         mode = "n",
-        "<leader>fre",
-        function()
-          require("fzf-lua").lsp_references()
-        end,
-        desc = "References",
+        "<leader>fr",
+        "<Cmd>Fzf lsp_references<CR>",
+        desc = "references",
       },
     },
   },
@@ -616,6 +614,12 @@ return {
       { mode = "n", "<leader>gte", "<cmd>GoTest<cr>", desc = "Run tests" },
       { mode = "n", "<leader>grn", vim.lsp.buf.rename, desc = "[r]e[n]ame" },
       { mode = "n", "<leader>gre", vim.lsp.buf.references, desc = "[r][e]ferences" },
+      {
+        mode = "n",
+        "<leader>gre",
+        "<Cmd>Fzf lsp_references<CR>",
+        desc = "references",
+      },
       { mode = "n", "<leader>gat", "<cmd>GoAlt!<cr>", desc = "Toggle test" },
       { mode = "n", "<leader>gas", "<cmd>GoAltS!<cr>", desc = "Toggle split test" },
       { mode = "n", "<leader>gav", "<cmd>GoAltV!<cr>", desc = "Toggle vsplit test" },
